@@ -1,0 +1,325 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css">
+  <!--
+Jquery和datatable的js文件是必须得有的
+  -->
+  <script type="text/javascript" charset="utf8" src="JQuery/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="DataTables/datatables.min.js"></script>
+  <script type="text/javascript">
+    var data = [
+     [
+        "Tiger Nixon",
+        "System Architect",
+        "Edinburgh",
+        "5421",
+        "2011/04/25",
+        "$3,120"
+     ],
+     [
+        "Garrett Winters",
+        "Director",
+        "Edinburgh",
+        "8422",
+        "2011/07/25",
+        "$5,300"
+     ],
+     [
+        "Thor Walton",
+        "Developer",
+        "Edinburgh",
+        "61",
+        "2011/07/25",
+        "$98,540" 
+     ],
+     [
+       "Finn Camacho",
+        "Developer",
+        "Edinburgh",
+        "47",
+        "2011/07/25",
+        "$87,500" 
+     ]       
+   ];
+
+  </script>
+  <style type="text/css">
+    div.container{
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <!--
+一般调整div的大小来调整表格的大小更好  表格的大小就设为100%
+  -->
+  <div class="container">
+  <!--
+表格的创建
+默认样式的使用
+使用步骤
+1、下载dataTable的包 https://datatables.net/download/
+2、在文件中引用
+3、添加数据
+ 处理模式
+    1、客户端直接读取数据并添加进去
+          少于1000行数据时使用
+    2、服务器端使用Ajax异步传输进行添加
+         多于1000行时使用
+    这两种模式是互斥的 不能同时使用
+
+  数据源
+    DataTable中的一定是数组。数组中的每一项被展现为一行
+    每一项的数据类型可以为：
+       Arrays-[]
+       Obhects-{}
+       Instance-new MyClass()
+  获取数据源
+  1、DOM
+      HTML5中可以使用 data-order和data-sort属性自动进行排序
+      data-search和 data-filter属性自动搜索
+  2、Javascript
+      使用javascript方法获取数组（数据源）
+      在使用DataTables API 中的方法动态操作数组 https://datatables.net/manual/api
+  3、Ajax sourced data
+       Ajax的数据源可以是数组和对象数组，但是不可以是实例，因为它不可以被展现为Json格式
+4、读取表中的数据
+
+  -->
+  <table id="" class="display" style="width:100%">
+        <thead>
+            <tr>
+              <!--dataTable 也完全支持表头中使用跨行和跨列-->
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+          <!--  <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>$320,800</td>
+            </tr>
+            <tr>
+                <td>Cedric Kelly</td>
+                <td>Senior Javascript Developer</td>
+                <td>Edinburgh</td>
+                <td>22</td>
+                <td>$433,060</td>
+            </tr>
+            <tr>
+                <td>Sonya Frost</td>
+                <td>Software Engineer</td>
+                <td>Edinburgh</td>
+                <td>23</td>
+                <td>$103,600</td>
+            </tr>
+            <tr>
+                <td>Quinn Flynn</td>
+                <td>Support Lead</td>
+                <td>Edinburgh</td>
+                <td>22</td>
+                <td>$342,000</td>
+            </tr>
+            <tr>
+                <td>Dai Rios</td>
+                <td>Personnel Lead</td>
+                <td>Edinburgh</td>
+                <td>35</td>
+                <td>$217,500</td>
+            </tr>
+            <tr>
+                <td>Gavin Joyce</td>
+                <td>Developer</td>
+                <td>Edinburgh</td>
+                <td>42</td>
+                <td>$92,575</td>
+            </tr>
+            <tr>
+                <td>Martena Mccray</td>
+                <td>Post-Sales support</td>
+                <td>Edinburgh</td>
+                <td>46</td>
+                <td>$324,050</td>
+            </tr>
+            <tr>
+                <td>Jennifer Acosta</td>
+                <td>Junior Javascript Developer</td>
+                <td>Edinburgh</td>
+                <td>43</td>
+                <td>$75,650</td>
+            </tr>
+            <tr>
+                <td>Shad Decker</td>
+                <td>Regional Director</td>
+                <td>Edinburgh</td>
+                <td>51</td>
+                <td>$183,000</td>
+            </tr> -->
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>  
+
+     <!--     </table><table id="" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+      <tr>
+                <td>Jena Gaines</td>
+                <td>Office Manager</td>
+                <td>London</td>
+                <td>30</td>
+                <td>$90,560</td>
+            </tr>
+            <tr>
+                <td>Haley Kennedy</td>
+                <td>Senior Marketing Designer</td>
+                <td>London</td>
+                <td>43</td>
+                <td>$313,500</td>
+            </tr>
+            <tr>
+                <td>Tatyana Fitzpatrick</td>
+                <td>Regional Director</td>
+                <td>London</td>
+                <td>19</td>
+                <td>$385,750</td>
+            </tr>
+            <tr>
+                <td>Michael Silva</td>
+                <td>Marketing Designer</td>
+                <td>London</td>
+                <td>66</td>
+                <td>$198,500</td>
+            </tr>
+            <tr>
+                <td>Bradley Greer</td>
+                <td>Software Engineer</td>
+                <td>London</td>
+                <td>41</td>
+                <td>$132,000</td>
+            </tr>
+            <tr>
+                <td>Angelica Ramos</td>
+                <td>Chief Executive Officer (CEO)</td>
+                <td>London</td>
+                <td>47</td>
+                <td>$1,200,000</td>
+            </tr>
+            <tr>
+                <td>Suki Burks</td>
+                <td>Developer</td>
+                <td>London</td>
+                <td>53</td>
+                <td>$114,500</td>
+            </tr>
+            <tr>
+                <td>Prescott Bartlett</td>
+                <td>Technical Author</td>
+                <td>London</td>
+                <td>27</td>
+                <td>$145,000</td>
+            </tr>
+            <tr>
+                <td>Timothy Mooney</td>
+                <td>Office Manager</td>
+                <td>London</td>
+                <td>37</td>
+                <td>$136,200</td>
+            </tr>
+            <tr>
+                <td>Bruno Nash</td>
+                <td>Software Engineer</td>
+                <td>London</td>
+                <td>38</td>
+                <td>$163,500</td>
+            </tr>
+            <tr>
+                <td>Hermione Butler</td>
+                <td>Regional Director</td>
+                <td>London</td>
+                <td>47</td>
+                <td>$356,250</td>
+            </tr>
+            <tr>
+                <td>Lael Greer</td>
+                <td>Systems Administrator</td>
+                <td>London</td>
+                <td>21</td>
+                <td>$103,500</td>
+            </tr>   
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>    -->
+</div>
+
+<script type="text/javascript">
+  /*
+  1、会覆盖掉原有的数据
+  2、自动添加了分页、搜索和排序 可以人为的关闭
+   */
+$(document).ready(function() {
+   // $('#table_id').DataTable({ //使用id一个设置一个表
+   $('table.display').DataTable({ //使用table中的class一下设置多个表
+      data:data, //如果使用javascript设置数据将会把表中原有的数据给覆盖掉
+     // "ajax":'./ajax.txt',   //直接在静态页面加载会加载失败  需要服务器端使用http协议进行读取
+    //  "paging":   false,  
+    //  "ordering": false, 关闭排序
+      "order":[[3,'asc']], //下标为3的一列以升序排列   [3，'desc'] 以降序排列  默认值[[0,'asc']] ,也可设置多列排序 [[3,'asc'],[5,'desc']]
+   //   "info":     false,
+
+       "columnDefs": [  //单独设置列的属性
+       
+            {
+                "targets": [1],
+                "visible": false,  //设置列为不可见
+                "searchable": false //设置列为不可搜索
+            },
+            {
+              "targets":[3],
+               "orderData":[3,0] //默认按第三列排序，第三列相同时按照第一列进行排序
+            },
+            {
+                "targets": [4],
+                "visible": false
+            }
+        ],
+
+        "dom": '<"top"i>rt<"bottom"flp><"clear">',//用于设置修饰元素的位置
+        "stateSave":true,  //保存表格的状态，分页等，再次进入时仍位于该状态
+        "pagingType":"full_numbers"// 分页的格式 显示 第一个前一页，后一页 最后一页 也可参考手册定制 numbers simple simple_numbers full full_numbers first_last_numbers
+        //分页也可用滚轮展示
+    });
+} );
+</script>
+
+</body>
+
+</html>
